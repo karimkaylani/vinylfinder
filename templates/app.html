@@ -10,7 +10,12 @@
     {% endfor %}
     <div class="container">
         <form method='post'>
-            <input type='submit' value='Next'>
+            {% if page > 0 %}
+            <input type='submit' name='submit_button' value='Previous'>
+            {% endif %}
+            {% if page < 1 %}
+            <input type='submit' name='submit_button' value='Next'>
+            {% endif %}
         </form>
     </div>
 </body>

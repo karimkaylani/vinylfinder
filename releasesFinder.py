@@ -3,8 +3,8 @@ import discogs_client
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import random
 
-NUMBER_OF_ARTISTS = 2
-ALBUMS_PER_ARTIST = 2
+NUMBER_OF_ARTISTS = 25
+ALBUMS_PER_ARTIST = 1
 
 # referenced spotipy/examples/artist_albums.py
 def get_artist_albums(sp, artist, num):
@@ -35,10 +35,13 @@ def get_artist_albums(sp, artist, num):
 def get_releases(sp, d, page):
     artists = []
     releases = []
+    page_factor = page * NUMBER_OF_ARTISTS
 
-    results = sp.current_user_top_artists(limit=NUMBER_OF_ARTISTS)
+    results = sp.current_user_top_artists(limit=page_factor+NUMBER_OF_ARTISTS)
     for item in results['items']:
         artists.append(item)
+    
+    artists = artists[page_factor:]
     
     seen = set()
 

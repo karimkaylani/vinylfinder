@@ -14,8 +14,6 @@ app.config['SESSION_FILE_DIR'] = './.flask_session/'
 cache_folder = './.spotify_caches/'
 scope = "user-top-read"
 
-session['page'] = 0
-
 
 d = discogs_client.Client('SpotifyApp/0.1', user_token='XxPisqbcNHfHaDBbvVOiRiFcelaTzcmGpLpQOWFU')
 
@@ -28,8 +26,14 @@ def current_session_cache_path():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        session['page'] += 1
-        redirect('/')
+        if request.form['submit_button'] == 'Next':
+            session['page'] += 1
+            redirect('/')
+        else:
+            session['page'] -= 1
+            redirect('/')
+    else:
+        session['page'] = 0
     
     if not session.get('uuid'):
         # assign user ID
@@ -53,7 +57,7 @@ def index():
     
     sp = spotipy.Spotify(auth_manager=auth_manager)
     releases = releasesFinder.get_releases(sp, d, session['page'])
-    return render_template('app.html', releases=releases)
+    return render_template('app.html', releases=releases, page=session['page'])
 
 if (__name__ == "__main__"):
     app.run(threaded=True, 
