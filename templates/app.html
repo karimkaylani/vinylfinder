@@ -8,5 +8,10 @@
     {% for release in releases %}
         <h1><a href={{'https://discogs.com' + release.url}} target="_blank">{{release.title + ' (' + release.year|string + ')'}}</a></h1>
     {% endfor %}
+    <div class="container">
+        <form method='post'>
+            <input type='submit' value='Next'>
+        </form>
+    </div>
 </body>
 </html>

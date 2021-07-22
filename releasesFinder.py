@@ -32,7 +32,7 @@ def get_artist_albums(sp, artist, num):
     length = min(len(albums), num)
     return albums[:length]
 
-def get_releases(sp, d):
+def get_releases(sp, d, page):
     artists = []
     releases = []
 
@@ -58,5 +58,5 @@ def get_releases(sp, d):
             except:
                 print('failed!')
                 continue
-    random.shuffle(releases)
+    #random.shuffle(releases)
     return releases
