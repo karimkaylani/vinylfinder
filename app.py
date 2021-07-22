@@ -32,6 +32,7 @@ def index():
         else:
             session['page'] -= 1
             redirect('/')
+        
     else:
         session['page'] = 0
     
