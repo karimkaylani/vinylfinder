@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+
+<body>
+    {% for release in releases %}
+        <h1><a href={{'https://discogs.com' + release.url}} target="_blank">{{release.title + ' (' + release.year|string + ')'}}</a></h1>
+    {% endfor %}
+</body>
+</html>
