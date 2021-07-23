@@ -3,7 +3,7 @@ import discogs_client
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import random
 
-NUMBER_OF_ARTISTS = 25
+NUMBER_OF_ARTISTS = 25 #25
 ALBUMS_PER_ARTIST = 1
 
 # referenced spotipy/examples/artist_albums.py
