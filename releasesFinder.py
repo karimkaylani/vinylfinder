@@ -3,7 +3,7 @@ import discogs_client
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import random
 
-NUMBER_OF_ARTISTS = 5 #25
+NUMBER_OF_ARTISTS = 30
 ALBUMS_PER_ARTIST = 1
 
 # referenced spotipy/examples/artist_albums.py
@@ -64,5 +64,4 @@ def get_releases(sp, d, page):
             except:
                 print('failed!')
                 continue
-    #random.shuffle(releases)
     return releases

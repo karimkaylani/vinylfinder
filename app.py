@@ -6,7 +6,6 @@ import discogs_client
 import uuid
 import releasesFinder
 
-#os.environ["SPOTIPY_REDIRECT_URI"] = 'http://127.0.0.1:5000/callback/'
 DISCOGS_USER_ID = os.environ['DISCOGS_USER_ID']
 
 app = Flask(__name__)
