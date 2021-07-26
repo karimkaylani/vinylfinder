@@ -15,7 +15,10 @@ cache_folder = './.spotify_caches/'
 scope = "user-top-read"
 
 
-d = discogs_client.Client('SpotifyApp/0.1', user_token='XxPisqbcNHfHaDBbvVOiRiFcelaTzcmGpLpQOWFU')
+d = discogs_client.Client('VinylFinder/0.1', 
+user_token='XxPisqbcNHfHaDBbvVOiRiFcelaTzcmGpLpQOWFU')
+
+
 
 if not os.path.exists(cache_folder):
     os.makedirs(cache_folder)
@@ -61,5 +64,4 @@ def index():
     return render_template('app.html', releases=releases, page=session['page'])
 
 if (__name__ == "__main__"):
-    app.run(threaded=True, 
-    port=5000)
+    app.run(threaded=True, port=5000, host='127.0.0.1')

@@ -7,19 +7,22 @@ NUMBER_OF_ARTISTS = 25 #25
 ALBUMS_PER_ARTIST = 1
 
 # referenced spotipy/examples/artist_albums.py
-def get_artist_albums(sp, artist, num):
+def get_artist_albums(artist, num):
     master = []
     dups = set()
     a_id = artist['id']
 
+    auth_manager = SpotifyClientCredentials()
+    spot = spotipy.Spotify(auth_manager=auth_manager)
+
     try:
-        results = sp.artist_albums(a_id, album_type='album,single')
+        results = spot.artist_albums(a_id, album_type='album,single')
     except:
         return []
     
     master.extend(results['items'])
     while results['next']:
-        results = sp.next(results)
+        results = spot.next(results)
         master.extend(results['items'])
     albums = []
     for album in master:
@@ -47,7 +50,7 @@ def get_releases(sp, d, page):
 
     for artist in artists:
         print(artist['name'])
-        albums = get_artist_albums(sp, artist, ALBUMS_PER_ARTIST)
+        albums = get_artist_albums(artist, ALBUMS_PER_ARTIST)
         for album in albums:
             print(album['name'])
             results = d.search(album['name'], type='release', artist=artist['name'], format='vinyl')
