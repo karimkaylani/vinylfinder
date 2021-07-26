@@ -23,9 +23,11 @@ div.motto {
   
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-auto-rows: 300px;
+    align-items: center;
     gap: 10px;
+    padding-left: 30px;
     
 }
 
@@ -49,22 +51,25 @@ footer {
     margin: 0 auto;
 }
 
-div.icons {
+div.credits {
     font-family: Inter;
     font-style: italic;
     font-size: 12px;
 }
 
 div.logo {
-    max-width: 100%;
+    display: block;
+    text-align: center;
+}
+
+img.img-logo {
+    width: 100%;
+    max-width: 600px;
     height: auto;
-    display: table;
-    margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 body {
     margin-left:auto;
     margin-right:auto;
-    width:960px;
 }

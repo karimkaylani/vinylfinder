@@ -10,14 +10,16 @@
     {% endblock %}
 </head>
 <body>
-    <div class='logo'>
-        <a href={{ url_for('index') }}>
-            <img src="{{ url_for('static', filename='vinyl_finder.png') }}" width="600"></div>
-        </a>
+    <a href={{ url_for('index') }}>
+        <div class='logo'>
+            <img class="img-logo" src="{{ url_for('static', filename='vinyl_finder.png') }}">
+        </div>
+    </a>
     {% block body %}{% endblock %}
+    <div style='margin-top: 30px;'></div>
     <footer>
         <div class="b"><p>Made by Karim Kaylani</p></div>
-        <div class="icons">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a>
+        <div class="credits">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a>
              from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </footer>
 </body>
