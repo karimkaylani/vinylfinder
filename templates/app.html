@@ -2,8 +2,6 @@
 
 {% block head %}
 
-<div class='a'></div><h1>Vinyl Finder</h1></div>
-
 {% endblock %}
 
 {% block body %}
@@ -12,7 +10,7 @@
     {% for release in releases %} 
     <div>
         <a href={{'https://discogs.com' + release.url}} target="_blank">
-            <img src={{ release.images[0].get('uri') }} width='200' height='200'>
+            <div class="album_art"><img src={{ release.images[0].get('uri') }} width='200' height='200'></div>
         </a>
         <div class='b'><p>{{release.title + ' (' + release.year|string + ')'}}</a></p></div>
         <p>{{ release.artists[0].name }}</p>

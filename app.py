@@ -1,12 +1,10 @@
 import os
-from flask import Flask, session, request, redirect, render_template, jsonify
+from flask import Flask, session, request, redirect, render_template
 from flask_caching import Cache
 import spotipy
 import discogs_client
 import uuid
 import releasesFinder
-import json
-import jsonpickle
 
 #os.environ["SPOTIPY_REDIRECT_URI"] = 'http://127.0.0.1:5000/callback/'
 
@@ -44,32 +42,28 @@ def index():
     if request.args.get("code"):
         # redirect from spotify
         auth_manager.get_access_token(request.args.get("code"))
-        session['page'] = 0
         return redirect('/')
 
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
         # Step 2. Display sign in link when no token
         auth_url = auth_manager.get_authorize_url()
-        #print(auth_url)
         return render_template('signin.html', auth_url=auth_url)
 
     if session.get('releases'):
-        return redirect('/callback')
+        return redirect('/vinyls')
 
     sp = spotipy.Spotify(auth_manager=auth_manager)
-    releases = releasesFinder.get_releases(sp, d, session['page'])
-    session['releases'] = jsonpickle.encode(releases)
-    return redirect('/callback')
+    releases = releasesFinder.get_releases(sp, d, 0)
+    session['releases'] = render_template('app.html', releases=releases, page=0)
+    return redirect('/vinyls')
     
     
-@app.route('/callback', methods=['GET', 'POST'])
+@app.route('/vinyls', methods=['GET', 'POST'])
 @cache.cached(timeout=50)
 def callback():
     if not session.get('releases'):
         return redirect('/')
-    releases = jsonpickle.decode(session['releases'])
-    return render_template('app.html', releases=releases, page=session['page'])
-    
+    return session['releases']
     
 
 if (__name__ == "__main__"):

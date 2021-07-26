@@ -4,9 +4,15 @@
 {% endblock %}
 
 {% block body %}
-<div class='a'>
-<h1><a href={{auth_url}}>Sign In</a></h1>
+<p><div class="motto">Cross-search your Spotify library and see <br>if your favorite albums are available on vinyl!</div></p>
+<div style='margin-bottom: 250px;'></div>
+<div style="text-align: center;">
+    <a href={{auth_url}}>
+        <img src="{{ url_for('static', filename='connect_spotify.png') }}" width="400" height="80">
+    </a>
 </div>
+<p><div class="a" style='font-style:italic; font-family: Inter;'>Make take up to a minute to load results due to API speeds</div></p>
+<div style='margin-bottom: 100px;'></div>
 {% endblock %}
 
 

@@ -9,7 +9,17 @@ h1 {
 
 div.a {
     text-align: center;
+    margin: 0 auto;
   }
+
+div.motto {
+    font-family: Inter;
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 20px;
+}
   
 .wrapper {
     display: grid;
@@ -19,7 +29,7 @@ div.a {
     
 }
 
-img {
+div.album_art {
     display: inline;
     align-items: center;
     justify-content: center;
@@ -32,4 +42,29 @@ p {
 
 div.b {
     font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin: 0 auto;
+}
+
+div.icons {
+    font-family: Inter;
+    font-style: italic;
+    font-size: 12px;
+}
+
+div.logo {
+    max-width: 100%;
+    height: auto;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+body {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
 }
