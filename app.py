@@ -7,6 +7,7 @@ import uuid
 import releasesFinder
 
 #os.environ["SPOTIPY_REDIRECT_URI"] = 'http://127.0.0.1:5000/callback/'
+DISCOGS_USER_ID = os.environ['DISCOGS_USER_ID']
 
 app = Flask(__name__)
 cache = Cache(app)
@@ -20,7 +21,7 @@ cache_folder = './.spotify_caches/'
 scope = "user-top-read"
 
 d = discogs_client.Client('VinylFinder/0.1', 
-user_token='XxPisqbcNHfHaDBbvVOiRiFcelaTzcmGpLpQOWFU')
+user_token=DISCOGS_USER_ID)
 
 if not os.path.exists(cache_folder):
     os.makedirs(cache_folder)
