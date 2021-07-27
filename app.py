@@ -61,7 +61,7 @@ def index():
 
     sp = spotipy.Spotify(auth_manager=auth_manager)
     releases = releasesFinder.get_releases(sp, d, 0)
-    releases = releases[:min(len(releases), 25)]
+    releases = releases[:min(len(releases), 24)]
     session['releases'] = render_template('app.html', releases=releases, page=0)
     return redirect('/vinyls')
     
