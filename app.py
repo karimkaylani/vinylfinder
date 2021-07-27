@@ -5,12 +5,20 @@ import spotipy
 import discogs_client
 import uuid
 import releasesFinder
+import compress_pickle
 
-DISCOGS_USER_ID = os.environ['DISCOGS_USER_ID']
+DISCOGS_USER_ID = os.getenv('DISCOGS_USER_ID')
+
+config = {
+    "DEBUG": True,          # some Flask specific configs
+    "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
 
 app = Flask(__name__)
+app.config.from_mapping(config)
 cache = Cache(app)
-app.config['CACHE_TYPE'] = 'simple'
+
 
 # adapted from exaples/app.py
 app.config['SECRET_KEY'] = os.urandom(64)
@@ -54,6 +62,7 @@ def index():
 
     sp = spotipy.Spotify(auth_manager=auth_manager)
     releases = releasesFinder.get_releases(sp, d, 0)
+    releases = releases[:min(len(releases), 25)]
     session['releases'] = render_template('app.html', releases=releases, page=0)
     return redirect('/vinyls')
     
@@ -63,7 +72,7 @@ def index():
 def callback():
     if not session.get('releases'):
         return redirect('/')
-    return session['releases']
+    return compress_pickle.load(session['releases'], 'bz2')
     
 
 if (__name__ == "__main__"):
