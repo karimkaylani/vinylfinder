@@ -5,7 +5,6 @@ import spotipy
 import discogs_client
 import uuid
 import releasesFinder
-import compress_pickle
 
 DISCOGS_USER_ID = os.getenv('DISCOGS_USER_ID')
 
