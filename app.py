@@ -71,7 +71,7 @@ def index():
 def callback():
     if not session.get('releases'):
         return redirect('/')
-    return compress_pickle.load(session['releases'], 'bz2')
+    return session['releases']
     
 
 if (__name__ == "__main__"):
