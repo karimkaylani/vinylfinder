@@ -1,29 +1,18 @@
 import os
 from flask import Flask, session, request, redirect, render_template
-from flask_caching import Cache
 import spotipy
 import discogs_client
 import uuid
 import releasesFinder
 
 DISCOGS_USER_ID = os.getenv('DISCOGS_USER_ID')
-
-config = {
-    "DEBUG": True,          # some Flask specific configs
-    "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
-    "CACHE_DEFAULT_TIMEOUT": 300
-}
-
 app = Flask(__name__)
-app.config.from_mapping(config)
-cache = Cache(app)
-
 
 # adapted from exaples/app.py
 app.config['SECRET_KEY'] = os.urandom(64)
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = './.flask_session/'
-cache_folder = './.spotify_caches/'
+cache_folder = os.path.join(os.getcwd(), '.spotify_caches/')
 scope = "user-top-read"
 
 d = discogs_client.Client('VinylFinder/0.1', 
@@ -67,7 +56,6 @@ def index():
     
     
 @app.route('/vinyls', methods=['GET', 'POST'])
-@cache.cached(timeout=50)
 def callback():
     if not session.get('releases'):
         return redirect('/')
