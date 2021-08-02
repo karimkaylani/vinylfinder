@@ -2,6 +2,8 @@ import spotipy
 import discogs_client
 from spotipy.oauth2 import SpotifyOAuth, SpotifyClientCredentials
 import random
+import requests
+import time
 
 NUMBER_OF_ARTISTS = 30
 ALBUMS_PER_ARTIST = 1
@@ -47,8 +49,13 @@ def get_releases(sp, d, page):
     artists = artists[page_factor:]
     
     seen = set()
+    start_time = time.time()
 
     for artist in artists:
+        if time.time() - start_time > 1:
+            r = requests.get('http://google.com')
+            start_time = time.time()
+            print('sent!')
         print(artist['name'])
         albums = get_artist_albums(artist, ALBUMS_PER_ARTIST)
         for album in albums:
