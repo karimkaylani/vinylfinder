@@ -56,7 +56,6 @@ def get_releases(sp, d, page):
         for album in albums:
             print(album['name'])
             results = d.search(album['name'], type='release', artist=artist['name'], format='vinyl')
-            time.sleep(0.5)
             try:
                 release = results.page(0)[0]
                 print('found master!')
