@@ -49,18 +49,14 @@ def get_releases(sp, d, page):
     artists = artists[page_factor:]
     
     seen = set()
-    start_time = time.time()
 
     for artist in artists:
-        if time.time() - start_time > 1:
-            r = requests.get('http://google.com')
-            start_time = time.time()
-            print('sent!')
         print(artist['name'])
         albums = get_artist_albums(artist, ALBUMS_PER_ARTIST)
         for album in albums:
             print(album['name'])
             results = d.search(album['name'], type='release', artist=artist['name'], format='vinyl')
+            time.sleep(0.5)
             try:
                 release = results.page(0)[0]
                 print('found master!')
